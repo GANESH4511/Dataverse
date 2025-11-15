@@ -1,0 +1,91 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(uuid())
+  walletAddress String   @unique
+  nonce         String   @default("0")     // ✅ add this
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  tasks    Task[]
+  payments Payment[]
+
+  @@map("users")
+}
+
+model Worker {
+  id             String   @id @default(uuid())
+  walletAddress  String   @unique
+  nonce          String   @default("0")     // ✅ optional but recommended
+  pendingBalance Int      @default(0)
+  lockedBalance  Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relations
+  submissions Submission[]
+
+  @@map("workers")
+}
+
+model Task {
+  id          String    @id @default(uuid())
+  title       String
+  description String?
+  fileUrl     String    // S3 URL for uploaded zip file
+  status      TaskStatus @default(IN_PROGRESS)
+  amount      Int       // payment amount in cents
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relations
+  userId      String
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  submissions Submission[]
+
+  @@map("tasks")
+}
+
+model Submission {
+  id        String   @id @default(uuid())
+  fileUrl   String   // S3 URL for submitted zip file
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  taskId   String
+  task     Task   @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  workerId String
+  worker   Worker @relation(fields: [workerId], references: [id], onDelete: Cascade)
+
+  @@map("submissions")
+}
+
+model Payment {
+  id        String   @id @default(uuid())
+  amount    Int      // amount in cents
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("payments")
+}
+
+enum TaskStatus {
+  IN_PROGRESS
+  COMPLETED
+}

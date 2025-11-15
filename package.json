@@ -1,0 +1,34 @@
+{
+  "name": "dataverse-v2",
+  "version": "1.0.0",
+  "description": "Decentralized task marketplace on Solana blockchain",
+  "private": true,
+  "scripts": {
+    "dev": "npm-run-all --parallel backend:dev user-frontend:dev worker-frontend:dev",
+    "backend:dev": "cd backend && npm run dev",
+    "user-frontend:dev": "cd user-frontend && npm run dev",
+    "worker-frontend:dev": "cd worker-frontend && npm run dev",
+    "build": "npm-run-all --sequential backend:build user-frontend:build worker-frontend:build",
+    "backend:build": "cd backend && npm run build",
+    "user-frontend:build": "cd user-frontend && npm run build",
+    "worker-frontend:build": "cd worker-frontend && npm run build",
+    "start": "npm-run-all --parallel backend:start user-frontend:start worker-frontend:start",
+    "backend:start": "cd backend && npm start",
+    "user-frontend:start": "cd user-frontend && npm start",
+    "worker-frontend:start": "cd worker-frontend && npm start",
+    "setup": "npm install && npm run backend:setup",
+    "backend:setup": "cd backend && npm run setup"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  },
+  "keywords": [
+    "solana",
+    "web3",
+    "marketplace",
+    "tasks",
+    "decentralized"
+  ],
+  "author": "",
+  "license": "MIT"
+}

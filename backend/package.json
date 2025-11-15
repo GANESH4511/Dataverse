@@ -1,0 +1,59 @@
+{
+  "name": "dataverse-backend",
+  "version": "1.0.0",
+  "description": "Backend for Dataverse Web2 project",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio",
+    "test": "node test-server.js",
+    "setup": "npm run db:generate && npm run db:push",
+    "clean": "rm -rf dist node_modules",
+    "server:start": "powershell -ExecutionPolicy Bypass -File server-manager.ps1 start",
+    "server:stop": "powershell -ExecutionPolicy Bypass -File server-manager.ps1 stop",
+    "server:restart": "powershell -ExecutionPolicy Bypass -File server-manager.ps1 restart",
+    "server:status": "powershell -ExecutionPolicy Bypass -File server-manager.ps1 status"
+  },
+  "keywords": [
+    "express",
+    "typescript",
+    "prisma",
+    "aws"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.450.0",
+    "@aws-sdk/s3-request-presigner": "^3.901.0",
+    "@prisma/client": "^5.6.0",
+    "@solana/wallet-adapter-base": "^0.9.27",
+    "@solana/wallet-adapter-react": "^0.15.39",
+    "@solana/wallet-adapter-react-ui": "^0.9.39",
+    "@solana/wallet-adapter-wallets": "^0.19.37",
+    "@solana/web3.js": "^1.98.4",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/multer": "^1.4.11",
+    "@types/node": "^20.9.0",
+    "@types/uuid": "^9.0.7",
+    "prisma": "^5.6.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}

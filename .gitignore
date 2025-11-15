@@ -1,0 +1,69 @@
+# Dependencies
+node_modules/
+*.pnp
+.pnp.js
+
+# Testing
+coverage/
+.nyc_output/
+
+# Production
+build/
+dist/
+.next/
+out/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.production.local
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+
+# OS specific
+Thumbs.db
+.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal
+
+# Build artifacts
+.turbo/
+.cache/
+
+# Package manager lock files (optional - uncomment if desired)
+# package-lock.json
+# yarn.lock
+
+# IDE
+.vscode/extensions.json
+launch.json
+
+# Miscellaneous
+.eslintcache
+.stylelintcache
+*.bak
+*.swo
+*.swp
